@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{title}}!{% endblock %}
+
+
+{% block body %}
+    <h2>Page d'accueil</h2>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Libellé</th>
+            <th>Prix</th>
+        </tr>
+        {% for article in articles %}
+            <tr>
+                <td> {{ article.id }} </td>
+                <td> <a href="{{ path('app_home_show', {'id': article.id }) }}">{{ article.libelle }}</a> </td>
+                <td> {{ article.prix }} </td>
+            </tr>
+            {% else %}
+                <div>Pas d'article en stock</div>
+        {% endfor %}
+    </table>
+    <a href="{{path('app_home_somme')}}">Somme</a>
+    {# commentaire #}
+    <!-- comm-->
+
+{% endblock %}
