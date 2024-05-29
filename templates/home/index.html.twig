@@ -11,18 +11,22 @@
             <th>ID</th>
             <th>Libellé</th>
             <th>Prix</th>
+            <th>Quantité</th>
+            <th>Date</th>
         </tr>
         {% for article in articles %}
             <tr>
                 <td> {{ article.id }} </td>
-                <td> <a href="{{ path('app_home_show', {'id': article.id }) }}">{{ article.libelle }}</a> </td>
+                <td> <a href="">{{ article.libelle }}</a> </td>
                 <td> {{ article.prix }} </td>
+                <td> {{ article.stock }} </td>
+                <td> {{ article.createAt | date("m/d/Y à H:s:i") }} </td>
             </tr>
             {% else %}
                 <div>Pas d'article en stock</div>
         {% endfor %}
     </table>
-    <a href="{{path('app_home_somme')}}">Somme</a>
+    
     {# commentaire #}
     <!-- comm-->
 
