@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,8 +35,14 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $article->setCreateAt(new \DateTimeImmutable());
-            $entityManager->persist($article);
-            $entityManager->flush();
+            try{
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                $this->addFlash("success", "L'article " . $article->getLibelle()." est ajouté avec succès");
+            }catch(Exception $e){
+                $this->addFlash("warning", "L'article " . $article->getLibelle()." n'est pas ajouté");
+            }
 
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }

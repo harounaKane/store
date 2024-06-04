@@ -16,6 +16,7 @@
                 <th>Prix</th>
                 <th>Create_at</th>
                 <th>Stock</th>
+                <th>Catégorie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{ article.prix }}</td>
                 <td>{{ article.createAt ? article.createAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ article.stock }}</td>
+                <td>{{ article.categorie.nom }}</td>
                 <td>
                     <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>

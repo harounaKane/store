@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -23,6 +25,14 @@ class ArticleType extends AbstractType
             ])
             ->add('prix', NumberType::class)
             ->add('stock')
+            ->add("categorie", EntityType::class, [
+                "label" => "Catégorie",
+                "class" => Categorie::class,
+                "choice_label" => function($cat){
+                    return $cat->getNom();
+                }
+
+            ])
         ;
     }
 
